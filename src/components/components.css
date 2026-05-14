@@ -1,0 +1,267 @@
+/*
+ * Canonical component recipes.
+ *
+ * Optional layer — requires `tokens.css`. Import once at the app root:
+ *   @import "@elijahfrost/design-system/components.css";
+ *
+ * Every styled property resolves to a token from tokens.css. No raw hex.
+ *
+ * State surface for every interactive control:
+ *   - default
+ *   - :hover           (pointer-only via @media)
+ *   - :focus-visible   (keyboard ring, 2px outline_2px offset, --color-fg-muted)
+ *   - :active          (no special treatment — relies on press scale on icons where present)
+ *   - :disabled        (opacity 0.4, cursor wait)
+ */
+
+/* ====================================================================
+   Button — outline (canonical primary)
+   Used by: "Download CV", "Download Résumé", "Send Message", "Back to home"
+   ==================================================================== */
+
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;                                            /* 8px — between icon and label */
+  min-height: 44px;                                        /* iOS hit target */
+  height: 2.5rem;                                          /* 40px */
+  padding: 0 1.25rem;                                      /* px-5 */
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 0;                                        /* square corners */
+  color: var(--color-fg-soft);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: var(--tracking-label-sm);
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  cursor: pointer;
+  transition-property: background-color, color, border-color, outline-color, opacity;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--theme-transition-ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@media (min-width: 640px) {
+  .ds-button {
+    height: 2.75rem;                                       /* 44px */
+    padding: 0 1.75rem;                                    /* px-7 */
+    font-size: 10px;
+    letter-spacing: var(--tracking-label);
+  }
+}
+
+.ds-button:hover {
+  border-color: var(--color-border-hover);
+  color: var(--color-fg);
+}
+
+.ds-button:focus-visible {
+  outline: 2px solid var(--color-fg-muted);
+  outline-offset: 2px;
+}
+
+.ds-button:disabled,
+.ds-button[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: wait;
+}
+
+/* Width variants */
+.ds-button--block { width: 100%; }
+@media (min-width: 640px) { .ds-button--block-sm-auto { width: auto; } }
+
+/* Alignment variants — left-align label for full-width form submits */
+.ds-button--align-start {
+  justify-content: flex-start;
+  padding: 0.625rem 1.5rem;                                /* py-2.5 px-6 */
+  height: auto;
+}
+@media (min-width: 640px) {
+  .ds-button--align-start {
+    padding: 0.75rem 2rem;                                 /* py-3 px-8 */
+  }
+}
+
+/* Icon inside button — sized to the body line so it sits on the cap-height */
+.ds-button__icon {
+  position: relative;
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+.ds-button__icon > svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 1.5;                                       /* canonical utility icon weight (audit flag 4) */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke: currentColor;
+}
+
+.ds-button__label {
+  display: block;
+  line-height: 1;
+  letter-spacing: inherit;
+}
+
+/* ====================================================================
+   Text input / textarea / search
+   ==================================================================== */
+
+.ds-input,
+.ds-textarea {
+  width: 100%;
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border-section);
+  border-radius: 0;
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;                                      /* text-xs */
+  line-height: 1.5;
+  padding: 0.625rem 0.75rem;                               /* py-2.5 px-3 */
+  outline: none;
+  transition-property: background-color, color, border-color, outline-color;
+  transition-duration: var(--duration-base);               /* unified to 120ms (audit flag 2) */
+  transition-timing-function: var(--theme-transition-ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@media (min-width: 640px) {
+  .ds-input,
+  .ds-textarea {
+    font-size: 0.875rem;                                   /* text-sm */
+    padding: 0.75rem 1rem;                                 /* py-3 px-4 */
+  }
+}
+
+.ds-textarea {
+  resize: none;
+  min-height: 7rem;
+}
+
+.ds-input::placeholder,
+.ds-textarea::placeholder {
+  color: var(--color-label);
+}
+
+.ds-input:focus-visible,
+.ds-textarea:focus-visible,
+.ds-input:focus,
+.ds-textarea:focus {
+  border-color: var(--color-border-input-focus);
+}
+
+.ds-input[aria-invalid="true"],
+.ds-textarea[aria-invalid="true"] {
+  border-color: var(--color-border-input-error);
+}
+.ds-input[aria-invalid="true"]:focus-visible,
+.ds-input[aria-invalid="true"]:focus,
+.ds-textarea[aria-invalid="true"]:focus-visible,
+.ds-textarea[aria-invalid="true"]:focus {
+  border-color: var(--color-border-input-error-focus);
+}
+
+.ds-input:disabled,
+.ds-textarea:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Search input — text-input look + leading icon slot (audit flag 9; synthesized).
+   Markup: <span class="ds-search"><svg class="ds-search__icon"/><input class="ds-input"/></span>
+*/
+.ds-search {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.ds-search > .ds-input {
+  padding-left: 2.25rem;                                   /* room for the leading icon (16px + gap) */
+}
+@media (min-width: 640px) {
+  .ds-search > .ds-input {
+    padding-left: 2.5rem;
+  }
+}
+.ds-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  color: var(--color-label);
+}
+@media (min-width: 640px) {
+  .ds-search__icon { left: 1rem; }
+}
+.ds-search > .ds-input:focus + .ds-search__icon,
+.ds-search > .ds-input:focus-visible + .ds-search__icon {
+  color: var(--color-fg-muted);
+}
+
+/* Field label + error message ------------------------------------- */
+
+.ds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ds-field__label {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-fg-dim);
+}
+
+.ds-field__error {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+@media (min-width: 640px) {
+  .ds-field__error {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}
+
+/* ====================================================================
+   Inline link
+   ==================================================================== */
+
+.ds-link {
+  color: var(--color-fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--duration-fast) var(--theme-transition-ease);
+}
+.ds-link:hover { color: var(--color-fg-bright); }
+.ds-link:focus-visible {
+  outline: 2px solid var(--color-fg-muted);
+  outline-offset: 2px;
+}
+.ds-link--quiet {
+  color: var(--color-fg-soft);
+  text-decoration: none;
+}
+.ds-link--quiet:hover { color: var(--color-fg); text-decoration: none; }

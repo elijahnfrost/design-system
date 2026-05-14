@@ -1,0 +1,63 @@
+{
+  "name": "@elijahfrost/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable visual language: color tokens, typography, motion, buttons, inputs, cursor, and a hero background grid. Framework-agnostic CSS variables; React reference components.",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./tokens": {
+      "types": "./src/tokens/tokens.ts",
+      "default": "./src/tokens/tokens.ts"
+    },
+    "./tokens.css": "./src/tokens/tokens.css",
+    "./components.css": "./src/components/components.css",
+    "./cursor.css": "./src/cursor/cursor.css",
+    "./styles.css": "./src/index.css",
+    "./components": {
+      "types": "./src/components/index.ts",
+      "default": "./src/components/index.ts"
+    },
+    "./grid": {
+      "types": "./src/grid/index.ts",
+      "default": "./src/grid/index.ts"
+    },
+    "./cursor": {
+      "types": "./src/cursor/index.ts",
+      "default": "./src/cursor/index.ts"
+    },
+    "./theme": {
+      "types": "./src/theme/index.ts",
+      "default": "./src/theme/index.ts"
+    }
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "react-dom": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.4.0"
+  }
+}

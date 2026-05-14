@@ -1,0 +1,19 @@
+/*
+ * Custom cursor — opt-in CSS.
+ *
+ * Optional layer; only needed if you mount `<CustomCursor />`. Import once:
+ *   @import "@elijahfrost/design-system/cursor.css";
+ *
+ * The React component sets `data-cursor-custom` on <html> when it activates.
+ * These rules hide the system pointer site-wide while it is mounted.
+ */
+
+html[data-cursor-custom],
+html[data-cursor-custom] * {
+  cursor: none !important;
+}
+
+/* Marker for the floating cursor layer itself. */
+[data-cursor-root] {
+  cursor: none !important;
+}

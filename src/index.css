@@ -1,0 +1,13 @@
+/*
+ * Combined CSS entry — imports tokens + components + cursor in the canonical order.
+ * Use this if you want the full visual surface in one import.
+ *
+ *   @import "@elijahfrost/design-system/styles.css";
+ *
+ * If you want to selectively skip layers (e.g. you're not using the custom
+ * cursor), import the individual files instead.
+ */
+
+@import "./tokens/tokens.css";
+@import "./components/components.css";
+@import "./cursor/cursor.css";
