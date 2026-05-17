@@ -1,11 +1,17 @@
 {
   "name": "@elijahfrost/design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Portable visual language: color tokens, typography, motion, buttons, inputs, cursor, and a hero background grid. Framework-agnostic CSS variables; React reference components.",
   "type": "module",
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "./src/index.ts",
+    "./src/index.js",
+    "./dist/index.js",
+    "./src/scope/vanilla.ts",
+    "./src/scope/vanilla.js",
+    "./dist/scope/vanilla.js"
   ],
   "files": [
     "src",
@@ -24,6 +30,7 @@
     "./tokens.css": "./src/tokens/tokens.css",
     "./components.css": "./src/components/components.css",
     "./cursor.css": "./src/cursor/cursor.css",
+    "./scope.css": "./src/scope/scope.css",
     "./styles.css": "./src/index.css",
     "./components": {
       "types": "./src/components/index.ts",
@@ -40,6 +47,14 @@
     "./theme": {
       "types": "./src/theme/index.ts",
       "default": "./src/theme/index.ts"
+    },
+    "./scope": {
+      "types": "./src/scope/index.ts",
+      "default": "./src/scope/index.ts"
+    },
+    "./scope/react": {
+      "types": "./src/scope/react.tsx",
+      "default": "./src/scope/react.tsx"
     }
   },
   "scripts": {
