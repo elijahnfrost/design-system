@@ -1,4 +1,5 @@
-# Design system
+<p align="center"><img src=".github/icon.svg" width="88" alt=""></p>
+<h1 align="center">Design System</h1>
 
 Portable visual language extracted from elijahfrost.com. Drop the `design-system/` folder into any new project and you get the same colors, typography, motion, buttons, inputs, custom cursor, and background grid.
 
