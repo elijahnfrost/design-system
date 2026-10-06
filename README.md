@@ -5,7 +5,7 @@ Portable visual language extracted from elijahfrost.com. Drop the `design-system
 
 - **Framework-agnostic foundation.** CSS variables in `src/tokens/tokens.css`. No framework required.
 - **React reference components.** Optional. Buttons, inputs, theme provider, custom cursor, background grid.
-- **No imports from the source site.** Every token value lives in this folder as a literal — copying it out is enough.
+- **No imports from the source site.** Every token value lives in this folder as a literal. Copying it out is enough.
 
 ---
 
@@ -118,10 +118,10 @@ const accent = palette.light.fgBright; // "#0c0a09"
 
 The system expects two font-face variables on `<html>`:
 
-- `--font-inter` — body / UI (Inter; weights 300–600)
-- `--font-cormorant` — display / italic emphasis (Cormorant Garamond; weights 300–700, normal + italic)
+- `--font-inter`: body / UI (Inter, weights 300–600)
+- `--font-cormorant`: display / italic emphasis (Cormorant Garamond, weights 300–700, normal + italic)
 
-Token CSS falls back to named families and then system fonts if you haven't wired the variables yet, so layouts won't break — they just lose the exact look.
+Token CSS falls back to named families and then system fonts if you haven't wired the variables yet, so layouts won't break and only lose the exact look.
 
 ### Next.js (App Router)
 
@@ -162,7 +162,7 @@ Self-hosting? Define the same variables wherever your `@font-face` declarations 
 
 ## Override surface
 
-You can change the system's appearance without forking it. Override any token at any layer — `:root`, `html.light`, a project root selector, or a single component.
+You can change the system's appearance without forking it. Override any token at any layer (`:root`, `html.light`, a project root selector, or a single component).
 
 ```css
 /* Project-wide override: lighter borders in dark mode */
@@ -195,7 +195,7 @@ Common override points:
 
 ## Extending the system
 
-The intent is that you add **project-specific** components in your app, built on the tokens — not in this package. The system stays small.
+The intent is that you add **project-specific** components in your app, built on the tokens, and keep them out of this package. The system stays small.
 
 To add a new component in your app using the tokens:
 
@@ -281,11 +281,11 @@ design-system/
 When this package is built, a handful of source-site inconsistencies were resolved as a single canonical version. Recorded for reference:
 
 1. **Disabled-button opacity** → `0.4` (source had `0.5` on hero, `0.4` on form submit).
-2. **Input transition** → `120ms` (unified with the theme transition; source used `100ms` on inputs and `120ms` on buttons).
+2. **Input transition** → `120ms` (unified with the theme transition, where the source used `100ms` on inputs and `120ms` on buttons).
 3. **Focus ring** → `outline: 2px solid var(--color-fg-muted); outline-offset: 2px` on every interactive control (source only declared one on the theme toggle).
-4. **Icon stroke width** → `1.5` default for `.ds-button__icon > svg`; `1.0` for ultra-light glyphs; the cursor stays at its geometry-tuned `1.35`.
+4. **Icon stroke width** → `1.5` default for `.ds-button__icon > svg`, `1.0` for ultra-light glyphs. The cursor stays at its geometry-tuned `1.35`.
 5. **Cursor SVG stroke** → driven by `--cursor-stroke` (source hardcoded `var(--color-bg-page)`, leaving the token unused).
 6. **Light-mode `--color-bullet`** → `#c4bfb6`, matching the relative quietness of the dark-mode value.
 7. **Letter-spacing scale** → five tokens: `tight` / `label-sm` / `label` / `eyebrow` / `display-eyebrow`.
-8. **Background grid viewport** → renders at all viewports by default; pass `disableBelow={640}` to gate on `sm`.
+8. **Background grid viewport** → renders at all viewports by default. Pass `disableBelow={640}` to gate on `sm`.
 9. **Search input** → recipe synthesized from the text-input recipe + leading-icon slot (source site has no search input).
